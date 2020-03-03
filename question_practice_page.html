@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>title</title>
+</head>
+<body>
+    <div id="menu">
+
+    </div>
+
+    <div id="questionEnclosure">
+        <div id="STARreminder">
+            <span class="STAR">Situation</span>
+            <span class="STAR">></span>
+            <span class="STAR">Task</span>
+            <span class="STAR">></span>
+            <span class="STAR">Action</span>
+            <span class="STAR">></span>
+            <span class="STAR">Result</span>
+        </div>
+        <div id="textbox">
+            <p>Welcome to the interview question practice tool!</p>
+            <p>This will allow you to practice some common interview questions</p>
+        </div>
+        <div id="timerParent">
+            <div id="timer"></div>
+            <div id="PBbackground">
+                <div id="progressBar"></div>
+            </div>
+        </div>
+        <div id="buttons">
+            <button id="continue">Continue</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<style>
+    body, html{
+        height: 100%;
+    }
+
+    #questionEnclosure{
+        background-color: white;
+        position: absolute;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 50%;
+        height: 50%;
+        left: 25%;
+        top: 25%;
+        border: solid;
+    }
+
+    #textbox {
+        background-color: pink;
+        position: relative;
+        max-height: 60%;
+        text-align: left;
+        font-family: Arial, Helvetica, sans-serif;
+        border-radius: 5px;
+        overflow: auto;
+        padding: 10px;
+    }
+    #buttons{
+        position: relative;
+    }
+    #continue{
+        position: relative;
+        width:25%;
+    }
+    #PBbackground {
+        background-color:lightblue;
+        position: relative;
+        border-radius: 10px;
+    }
+
+    #progressBar {
+        background-color: blue;
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        border-radius: 10px;
+    }
+
+    #timer{
+        position:relative;
+    }
+
+    ul{
+        padding-right:0;
+        margin-right: 0;
+    }
+
+    span.STAR{
+        padding-right: 5px;
+        font-size: x-large;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    #STARreminder{
+        position: absolute;
+        top: 0%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: lightblue;
+        overflow:hidden;
+    }
+</style>
+<script src="makeHeader.js"></script>
+<script src="question_practice_page.js"></script>

@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>title</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="menu">
+
+        </div>
+        <div id="pageTitle">
+            <h1>A collection of tools and resources to help you in your job search!</h1>
+            <h3>By Ignacio Procel</h3>
+        </div>
+        <div id="pic_container">
+            <img src="homepage_images/pic1.jpg" alt="This is the first picture" class="homepics" />
+            <img src="homepage_images/pic2.jpg" alt="This is the second picture" class="homepics" />
+            <img src="homepage_images/pic3.jpg" alt="This is the third picture" class="homepics" />
+            <img src="homepage_images/pic4.jpg" alt="This is the fourth picture" class="homepics" />
+            <img src="homepage_images/pic5.jpg" alt="This is the fifth picture" class="homepics" />
+            <img src="homepage_images/pic6.jpg" alt="This is the sixth picture" class="homepics" />
+            <button id="prevImg"></button>
+            <button id="nextImg"></button>
+        </div>
+        <div id="citation">
+
+        </div>
+
+        <form id="postRequest">
+            <fieldset>
+                <legend>Tell us how we're doing!</legend>
+                <textarea id="postBody" form="postRequest"></textarea>
+                <br />
+                <input type="submit" name="postBody" id="postSubmit">
+            </fieldset>
+        </form>
+    </div>
+        
+</body>
+
+</html>
+
+
+<style>
+    #wrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #pageTitle{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #pic_container {
+        position: relative;
+        width: 400px;
+        height: 300px;
+    }
+    #prevImg {
+        position:absolute;
+        height: 10%;
+        width: 6.7%;
+        border-radius: 50%;
+        background-color: #bbb;
+        top: 45%;
+        left: 0%;
+    }
+
+    #nextImg {
+        position:absolute;
+        height: 10%;
+        width: 6.7%;
+        border-radius: 50%;
+        background-color: #bbb;
+        top: 45%;
+        left: 93%;
+    }
+
+    #postRequest {
+        width: 400px;
+        height: 200px;
+        padding-top: 50px;
+    }
+    #postBody{
+        height: 150px;
+        width: 300px;
+    }
+
+    img.homepics {
+        position: absolute;
+    }
+
+    #citation {
+        font-size: small;
+    }
+    
+</style>
+
+<script src="makeHeader.js"></script>
+<script src="homepage.js"></script>
