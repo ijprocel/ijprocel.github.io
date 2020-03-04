@@ -1,5 +1,6 @@
 document.getElementById("continue").addEventListener("click", displayInstructionPage);
 
+//This function causes the instructions to appear in the text box. It should only be called once per visit of the page.
 function displayInstructionPage(){
         var textBox = document.getElementById("textbox");
         textBox.innerHTML = "";
@@ -29,6 +30,7 @@ function displayInstructionPage(){
         document.getElementById("continue").addEventListener("click", reviewNextQuestion);
 }
 
+//The list of interview questions that the user can practice.
 var questions = ["Tell me about yourself/give an elevator pitch.", "Tell me about a time that you failed and how you learned from it.", 
 "Tell me about your favorite classes and how they'll prepare you for this position.", "Tell me about a great success that you had.", 
 "Tell me about some challenges you faced while working on a team and how you overcame them. ", "What would you like your job title to be? What responsibilities would you like to have?",
@@ -44,6 +46,7 @@ fyShuffle(questions);
 var currentQ;
 var onInterval;
 
+//Implementation of the Fisher-Yates shuffle. Called once per page visit to shuffle the initial list of questions.
 function fyShuffle(arr){
         for (var i = arr.length-1; i > 0; i--){
                 var j = Math.floor(Math.random() * (i+1));
@@ -53,6 +56,7 @@ function fyShuffle(arr){
         }
 }
 
+//When called, this function shows the user the question that they are to answer and shows a 30s countdown with a timer and a progress bar.
 function reviewNextQuestion(){
         var textBox = document.getElementById("textbox");
         getNextQuestion();
@@ -60,15 +64,20 @@ function reviewNextQuestion(){
         var text = "<p>Your question is:</p><p><b>" + currentQ+ "</b></p>";
         textBox.innerHTML = text;
 
+        //Make the progress bar background and timer visible
         document.getElementById("timerParent").style.height = "60px";
         document.getElementById("PBbackground").style.height = "40px";
         document.getElementById("timer").innerText = "0:30";
 
+        //Make the progress bar foreground visible and full width.
         var pb = document.getElementById("progressBar");
         pb.style.width = "100%";
         pb.setAttribute("widthInPercent", "100%");
+
+        //Call the function that updates the timer and progress bar each second.
         onInterval = setInterval(function(){decProgBar(30, answerNextQuestion);}, 1000);
 
+        //Empty the button container and add the appropriate button to it.
         var btnDiv = document.getElementById("buttons");
         btnDiv.innerHTML = "";
 
@@ -78,31 +87,8 @@ function reviewNextQuestion(){
         btnDiv.appendChild(endReview);
 }
 
-function getNextQuestion(){
-        if (numQuestions > 0){
-                currentQ = questions.shift();
-                numQuestions--;
-                return;
-        }
-        var randInt = Math.floor(Math.random() * 3);
-        if (randInt == 2){
-                window.alert("Good");
-                if (good.length != 0){
-                        currentQ = good.shift();
-                        return;
-                }
-                currentQ = fair.shift();
-        }
-        else {
-                window.alert("Fair");
-                if (fair.length != 0){
-                        currentQ = fair.shift();
-                        return;
-                }
-                currentQ = good.shift();
-        }
-}
-
+/*Gives the user 3 minutes to answer the question. This function is called when either the user indicates that they are Finished
+reviewing the question, or when the 30s review period ends.*/
 function answerNextQuestion(){
         var textBox = document.getElementById("textbox");
         textBox.innerHTML = "<p>Answering...</p><p><b>" + currentQ+ "</b></p>" ;
@@ -123,6 +109,34 @@ function answerNextQuestion(){
         btnDiv.appendChild(doneAnswering);        
 }
 
+//Retrieves the next question.
+function getNextQuestion(){
+        //If the initial, shuffled question list has not been completely gone through, get the next question from there.
+        if (numQuestions > 0){
+                currentQ = questions.shift();
+                numQuestions--;
+                return;
+        }
+
+        //Otherwise, pick a question from either the "fair" or "good" lists. "Fair" has the greater probability of occurring.
+        var randInt = Math.floor(Math.random() * 3);
+        if (randInt == 2){
+                if (good.length != 0){
+                        currentQ = good.shift();
+                        return;
+                }
+                currentQ = fair.shift();
+        }
+        else {
+                if (fair.length != 0){
+                        currentQ = fair.shift();
+                        return;
+                }
+                currentQ = good.shift();
+        }
+}
+
+/*Gets the user's rating of their response. Adds the question to the "fair", "good", or "excellent" list as needed*/
 function rateResponse(){
         var textBox = document.getElementById("textbox");        
         var text = "<p>How would you rate your response to this question?<\p>";
@@ -146,11 +160,14 @@ function rateResponse(){
         }
 }
 
+//This function is bound to three different buttons with different arguments on the response review page.
 function rateQ(listOfQs){
         listOfQs.push(currentQ);
         readyForNext();
 }
 
+/*Shows the user un-ordered lists of how they've rated each question so far. If the user has rated all questions as "excellent",
+the ending message is displayed*/
 function readyForNext(){
         var textBox = document.getElementById("textbox");        
         var text = makeULLists(fair, "Fair") + makeULLists(good, "Good") + makeULLists(excellent, "Excellent");
@@ -180,6 +197,8 @@ function makeULLists(qs, name){
         return innerHTML;
 }
 
+/*Function meant to be called frequently to decrement the progress bar. Takes as arguments the length of time the 
+progress bar should represent and a function that when called brings up the next screen*/
 function decProgBar(numSeconds, func){
         var pb = document.getElementById("progressBar");
         
